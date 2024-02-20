@@ -1,4 +1,28 @@
 const tBody = document.querySelector('tbody');
+const btnNewBook = document.querySelector('#new-btn');
+const btnAddBook = document.querySelector('#add-btn');
+const btnCancelForm = document.querySelector('#cancel-btn');
+const dialog = document.querySelector('dialog');
+const titleInput = document.querySelector('#title');
+const authorInput = document.querySelector('#author');
+const pagesInput = document.querySelector('#pages');
+
+
+btnNewBook.addEventListener('click', () => {
+    dialog.showModal();
+});
+btnCancelForm.addEventListener('click', () => {
+    dialog.close();
+});
+btnAddBook.addEventListener('click', (e) => {
+    e.preventDefault();
+    addBookToLibrary(titleInput.value, authorInput.value, pagesInput.value);
+    titleInput.value = '';
+    authorInput.value = '';
+    pagesInput.value = '';
+    dialog.close();
+    displayBooks();
+});
 
 const myLibrary = [];
 
@@ -26,21 +50,29 @@ function addBookToLibrary(title, author, pages) {
 }
 
 function displayBooks() {
-    for (book of myLibrary) {
+    tBody.replaceChildren();
+    for (let i = 0; i < myLibrary.length; i++) {
         const tr = document.createElement('tr');
-        for (key in book) {
+        tr.classList.add(myLibrary[i].read ? 'read' : 'not-read');
+        for (key in myLibrary[i]) {
             const td = document.createElement('td');
             if (key === 'read') {
                 const deleteBtn = document.createElement('button');
-                deleteBtn.textContent = "Delete";
                 const readBtn = document.createElement('button');
+                deleteBtn.textContent = "Delete";
                 readBtn.textContent = "Toggle read";
+                readBtn.addEventListener('click', () => {
+                    myLibrary[i].read = !myLibrary[i].read;
+                    displayBooks();
+                });
                 td.appendChild(readBtn);
                 td.appendChild(deleteBtn);
-            } else {
-                td.textContent = book[key];
+                tr.appendChild(td);
+            } else if (myLibrary[i].hasOwnProperty(key)){
+                td.textContent = myLibrary[i][key];
+                tr.appendChild(td);
             }
-            tr.appendChild(td);
+            
         }
         tBody.appendChild(tr);
     }

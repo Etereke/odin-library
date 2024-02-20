@@ -42,9 +42,41 @@ td > button:first-child {
     margin-right: 0.5rem;
 }
 
-td > button {
+button {
     padding: 0.3rem 0.5rem;
     background-color: rgb(220, 220, 220);
     border: 1px solid rgb(190,190,190);
     border-radius: 10px;
+}
+
+.form-btn {
+    margin: 2rem 0 1rem;
+    font-size: 1rem;
+    padding: 0.5rem 0.8rem;
+}
+
+form {
+    width: 500px;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    align-items: center;
+    margin-top: 1rem;
+    margin-right: 3rem;
+}
+
+form input {
+    line-height: 1.5rem;
+}
+
+tr.not-read td {
+    background-color: #da1e28;
+    color: white;
+}
+
+tr.read td {
+    background-color:  #198038;
+    color: white;
 }
