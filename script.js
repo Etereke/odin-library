@@ -44,6 +44,10 @@ Book.prototype.info = function() {
     return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? "already read" : "not read yet"}`;
 }
 
+Book.prototype.toggleRead = function() {
+    this.read = !this.read;
+}
+
 function addBookToLibrary(title, author, pages) {
     myLibrary.push(new Book(title, author, pages));
 }
@@ -65,7 +69,7 @@ function displayBooks() {
                     displayBooks();
                 });
                 readBtn.addEventListener('click', () => {
-                    myLibrary[i].read = !myLibrary[i].read;
+                    myLibrary[i].toggleRead();
                     displayBooks();
                 });
                 td.appendChild(readBtn);
@@ -75,7 +79,6 @@ function displayBooks() {
                 td.textContent = myLibrary[i][key];
                 tr.appendChild(td);
             }
-            
         }
         tBody.appendChild(tr);
     }
