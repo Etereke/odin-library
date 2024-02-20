@@ -7,7 +7,6 @@ const titleInput = document.querySelector('#title');
 const authorInput = document.querySelector('#author');
 const pagesInput = document.querySelector('#pages');
 
-
 btnNewBook.addEventListener('click', () => {
     dialog.showModal();
 });
@@ -27,10 +26,10 @@ btnAddBook.addEventListener('click', (e) => {
 const myLibrary = [];
 
 addBookToLibrary('The Hobbit', 'J. R. R. Tolkien', 432);
-addBookToLibrary('The Hobbit', 'J. R. R. Tolkien', 432);
-addBookToLibrary('The Hobbit', 'J. R. R. Tolkien', 432);
-addBookToLibrary('The Hobbit', 'J. R. R. Tolkien', 432);
-addBookToLibrary('The Hobbit', 'J. R. R. Tolkien', 432);
+addBookToLibrary('Harry Potter and the Deathly Hallows', 'J. K. Rowling', 675);
+addBookToLibrary('Animal Farm', 'George Orwell', 121);
+addBookToLibrary('Brave New World', 'Aldous Huxley', 302);
+addBookToLibrary('Overlord 1 - The Undead King', 'Kugane Maruyama', 237);
 
 displayBooks();
 
@@ -61,6 +60,10 @@ function displayBooks() {
                 const readBtn = document.createElement('button');
                 deleteBtn.textContent = "Delete";
                 readBtn.textContent = "Toggle read";
+                deleteBtn.addEventListener('click', () => {
+                    myLibrary.splice(i, 1);
+                    displayBooks();
+                });
                 readBtn.addEventListener('click', () => {
                     myLibrary[i].read = !myLibrary[i].read;
                     displayBooks();
